@@ -24,11 +24,11 @@ class DLL:
                 self.tail.r = Node(value, self.tail)
                 self.tail = self.tail.r
         else:
-            n = self.head
+            here = self.head
             for i in range(_at):
-                n = n.r
-            n.l.r = Node(value, n.l, n)
-            n.l = n.l.r
+                here = here.r
+            here.l.r = Node(value, here.l, here)
+            here.l = here.l.r
         self.__size += 1
     def __del__(self):
         at = self.tail
@@ -50,24 +50,22 @@ class DLL:
             self.tail = self.tail.l
             self.tail.r = None
         else:
-            n = self.head
+            here = self.head
             for i in range(_at):
-                n = n.r
-            n.l.r = n.r
-            n.r.l = n.l
+                here = here.r
+            here.l.r = here.r
+            here.r.l = here.l
         self.__size -= 1
     def sort(self):
         if self.__size <= 1:
             return
 
-        # Find the maximum number to know the number of digits
         max_val = self.head.getDat()
         current = self.head.r
         while current is not None:
             if current.getDat() > max_val:
                 max_val = current.getDat()
             current = current.r
-
         exp = 1
         while max_val // exp > 0:
             self.__counting_sort(exp)
